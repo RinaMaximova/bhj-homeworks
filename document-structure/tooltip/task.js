@@ -1,9 +1,27 @@
 const links = document.querySelectorAll('.has-tooltip');
-const openTooltip = (e) => {
+const getTooltip = () => {
+    let tooltip = document.querySelector('.tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.classList.add('tooltip');
+        tooltip.classList.add('tooltip_active');
+        document.body.insertAdjacentElement('afterBegin', tooltip)
+    }
+
+    return tooltip;
+};
+
+const showTooltip = (e) => {
     e.preventDefault();
-    e.target.insertAdjacentHTML('afterEnd', `<div class='tooltip tooltip_active'>${e.target.title}</div>`);
+
+    let target = e.target;
+    let tooltip = getTooltip();
+
+    tooltip.innerHTML = target.title;
+    tooltip.style.top = `${target.getBoundingClientRect().top + 30}px`;
+    tooltip.style.left = `${target.getBoundingClientRect().left}px`;
 };
 
 for (link of links) {
-    link.addEventListener('click', openTooltip);
+    link.addEventListener('click', showTooltip);
 }

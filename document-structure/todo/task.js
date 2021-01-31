@@ -13,7 +13,7 @@ const writeTask = () => {
 };
 
 tasksString.addEventListener('keydown', (event) => {
-    if (event.keyCode === 13 && tasksString.value !== '') {
+    if (event.key === 13 && tasksString.value.trim() !== '') {
         event.preventDefault();
         tasksList.innerHTML += writeTask();
         tasksString.value = '';
@@ -22,7 +22,7 @@ tasksString.addEventListener('keydown', (event) => {
 
 button.addEventListener('click', (event) => {
     event.preventDefault();
-    if (tasksString.value !== '') {
+    if (tasksString.value.trim() !== '') {
         tasksList.innerHTML += writeTask();
         tasksString.value = '';
     }
