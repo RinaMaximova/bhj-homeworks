@@ -1,19 +1,26 @@
 const menuLinks = document.querySelectorAll('.menu__link');
+
+const closeMenu = (menu) => menu.classList.remove('menu_active');
+
+const openMenu = (menu) => {
+    closeActive();
+    menu.classList.add('menu_active');
+};
+
 const closeActive = () => {
-    let activeMenu = document.querySelector('.menu.menu_active');
+    let activeMenu = document.querySelector('.menu_sub.menu_active');
     if (activeMenu) {
-        activeMenu.classList.remove('menu_active')
+        closeMenu(activeMenu)
     }
 };
 
 menuLinks.forEach((el) => {
     el.addEventListener('click', (e) => {
-        closeActive();
-
-        let menu = el.parentNode.querySelector('.menu');
-        if (menu) {
+        let subMenu = el.parentNode.querySelector('.menu_sub');
+        if (subMenu) {
             e.preventDefault();
-            menu.classList.add('menu_active')
+
+            subMenu.classList.contains('menu_active') ? closeMenu(subMenu) : openMenu(subMenu);
         }
     })
 });
